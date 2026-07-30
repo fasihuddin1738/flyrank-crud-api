@@ -19,6 +19,4 @@ To start the server on your local machine, activate the virtual environment and 
 | **Delete** | DELETE | `/tasks/{id}` | *Pending Stage 4* |
 
 ## Example Request & Response
-
-```text
 ![alt text](/Screenshots/Stage3.png)
