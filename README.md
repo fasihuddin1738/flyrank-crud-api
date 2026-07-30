@@ -21,4 +21,4 @@ To start the server on your local machine, activate the virtual environment and 
 ## Example Request & Response
 
 ```text
-![alt text](/Screenshots/Stage 3.png)
+![Stage 3 CMD Prompt](/Screenshots/Stage3.png)
