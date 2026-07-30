@@ -20,16 +20,24 @@ To start the server on your local machine, activate the virtual environment and 
 
 ## Example Request & Response
 
+### Stage 1
+#### GET
+![GET CMD](/Screenshots/Stage1.png)
+
+### Stage 2
+#### GET one task by id
+![GET1 CMD](/Screenshots/Stage2.png)
+
 ### Stage 3
-#### Post
-![alt text](/Screenshots/Stage3.png)
+#### POST
+![POST CMD](/Screenshots/Stage3.png)
 
 ### Stage 4
 #### PUT
-![alt text](/Screenshots/Stage4%20PUT.png)
+![PUT CMD](/Screenshots/Stage4%20PUT.png)
 #### DELETE
-![alt text](/Screenshots/Stage4%20DELETE.png)
+![DELETE CMD](/Screenshots/Stage4%20DELETE.png)
 
 ### Stage 5
 #### SwaggerUI
-See the [assignment brief](SwaggerUI.pdf) for details.
+See the [assignment brief (SwaggerUI)](SwaggerUI.pdf) for details.

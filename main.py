@@ -1,3 +1,4 @@
+# Stage 0
 # pyrefly: ignore [missing-import]
 from fastapi import FastAPI, Response
 # pyrefly: ignore [missing-import]
@@ -20,6 +21,7 @@ tasks = [
     {"id": 3, "title": "Complete Stage 2", "done": True}
 ]
 
+# Stage 1
 @app.get("/")
 def read_root():
     """Returns API name and version."""
@@ -30,6 +32,7 @@ def health():
     """Checks if the server is alive."""
     return {"status": "ok"}
 
+# Stage 2
 @app.get("/tasks")
 def get_all_tasks():
     """Returns a list of all tasks in the in-memory database."""
@@ -44,6 +47,7 @@ def get_task(id: int):
     
     return JSONResponse(status_code=404, content={"error": f"Task {id} not found"})
 
+# Stage 3
 @app.post("/tasks", responses={400: {"description": "Invalid input - Title is missing or empty"}})
 def create_task(task_in: TaskCreate):
     """Creates a new task and assigns it a unique ID."""
@@ -65,6 +69,7 @@ def create_task(task_in: TaskCreate):
 
     return JSONResponse(status_code=201, content=new_task)
 
+# Stage 4
 @app.put("/tasks/{id}" , responses={400: {"description": "Invalid body"}, 404: {"description": "Task not found"}})
 def update_task(id: int, task_in: TaskUpdate):
     """Updates the title or completion status of an existing task."""
