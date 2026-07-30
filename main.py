@@ -1,7 +1,15 @@
 # pyrefly: ignore [missing-import]
 from fastapi import FastAPI
+# pyrefly: ignore [missing-import]
+from fastapi.responses import JSONResponse
 
 app = FastAPI()
+
+tasks = [
+    {"id": 1, "title": "Buy milk", "done": False},
+    {"id": 2, "title": "Learn FastAPI", "done": False},
+    {"id": 3, "title": "Complete Stage 2", "done": True}
+]
 
 @app.get("/")
 def read_root():
@@ -10,3 +18,15 @@ def read_root():
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+@app.get("/tasks")
+def get_all_tasks():
+    return tasks 
+
+@app.get("/tasks/{id}")
+def get_task(id: int):
+    for task in tasks:
+        if task["id"] == id:
+            return task
+    
+    return JSONResponse(status_code=404, content={"error": f"Task {id} not found"})
