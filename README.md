@@ -21,4 +21,11 @@ To start the server on your local machine, activate the virtual environment and 
 ## Example Request & Response
 
 ### Stage 3
+#### Post
 ![alt text](/Screenshots/Stage3.png)
+
+### Stage 4
+#### PUT
+![alt text](/Screenshots/Stage4%20PUT.png)
+#### DELETE
+![alt text](/Screenshots/Stage4%20DELETE.png)

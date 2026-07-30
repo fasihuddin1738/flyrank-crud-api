@@ -1,5 +1,5 @@
 # pyrefly: ignore [missing-import]
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 # pyrefly: ignore [missing-import]
 from fastapi.responses import JSONResponse
 # pyrefly: ignore [missing-import]
@@ -9,6 +9,10 @@ app = FastAPI()
 
 class TaskCreate(BaseModel):
     title: str | None = None 
+
+class TaskUpdate(BaseModel):
+    title: str | None = None
+    done: bool | None = None
 
 tasks = [
     {"id": 1, "title": "Buy milk", "done": False},
@@ -28,7 +32,7 @@ def health():
 def get_all_tasks():
     return tasks 
 
-@app.get("/tasks/{id}", responses={404: {"description": f"Task {id} not found"}})
+@app.get("/tasks/{id}", responses={404: {"description": "Task not found"}})
 def get_task(id: int):
     for task in tasks:
         if task["id"] == id:
@@ -55,3 +59,28 @@ def create_task(task_in: TaskCreate):
     tasks.append(new_task)
 
     return JSONResponse(status_code=201, content=new_task)
+
+@app.put("/tasks/{id}" , responses={400: {"description": "Invalid body"}, 404: {"description": "Task not found"}})
+def update_task(id: int, task_in: TaskUpdate):
+    if task_in.title is None and task_in.done is None:
+        return JSONResponse(status_code=400, content={"error": "Body cannot be empty"})
+
+    if task_in.title is not None and not task_in.title.strip():
+        return JSONResponse(status_code=400, content={"error": "Title cannot be empty"})
+    
+    for task in tasks:
+        if task["id"] == id:
+            if task_in.title is not None:
+                task["title"] = task_in.title.strip()
+            if task_in.done is not None:
+                task["done"] = task_in.done
+            return task
+    return JSONResponse(status_code=404, content={"error": f"Task {id} not found"})
+
+@app.delete("/tasks/{id}", responses={404: {"description": "Task not found"}})
+def delete_task(id: int):
+    for i, task in enumerate(tasks):
+        if task["id"] == id:
+            tasks.pop(i)
+            return Response(status_code = 204)
+    return JSONResponse(status_code=404, content={"error": f"Task {id} not found"})    
