@@ -22,18 +22,22 @@ tasks = [
 
 @app.get("/")
 def read_root():
+    """Returns API name and version."""
     return {"name": "Task API", "version": "1.0", "endpoints": ["/tasks"]}
 
 @app.get("/health")
 def health():
+    """Checks if the server is alive."""
     return {"status": "ok"}
 
 @app.get("/tasks")
 def get_all_tasks():
+    """Returns a list of all tasks in the in-memory database."""
     return tasks 
 
 @app.get("/tasks/{id}", responses={404: {"description": "Task not found"}})
 def get_task(id: int):
+    """Returns a single task matching the provided ID."""
     for task in tasks:
         if task["id"] == id:
             return task
@@ -42,6 +46,7 @@ def get_task(id: int):
 
 @app.post("/tasks", responses={400: {"description": "Invalid input - Title is missing or empty"}})
 def create_task(task_in: TaskCreate):
+    """Creates a new task and assigns it a unique ID."""
     if not task_in.title or not task_in.title.strip():
         return JSONResponse(status_code=400, content={"error": "Title is missing or empty"})
     
@@ -62,6 +67,7 @@ def create_task(task_in: TaskCreate):
 
 @app.put("/tasks/{id}" , responses={400: {"description": "Invalid body"}, 404: {"description": "Task not found"}})
 def update_task(id: int, task_in: TaskUpdate):
+    """Updates the title or completion status of an existing task."""
     if task_in.title is None and task_in.done is None:
         return JSONResponse(status_code=400, content={"error": "Body cannot be empty"})
 
@@ -79,6 +85,7 @@ def update_task(id: int, task_in: TaskUpdate):
 
 @app.delete("/tasks/{id}", responses={404: {"description": "Task not found"}})
 def delete_task(id: int):
+    """Deletes a task from the list based on its ID."""
     for i, task in enumerate(tasks):
         if task["id"] == id:
             tasks.pop(i)

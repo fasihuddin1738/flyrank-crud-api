@@ -29,3 +29,7 @@ To start the server on your local machine, activate the virtual environment and 
 ![alt text](/Screenshots/Stage4%20PUT.png)
 #### DELETE
 ![alt text](/Screenshots/Stage4%20DELETE.png)
+
+### Stage 5
+#### SwaggerUI
+See the [assignment brief](SwaggerUI.pdf) for details.
