@@ -15,8 +15,8 @@ To start the server on your local machine, activate the virtual environment and 
 | **Read All** | GET | `/tasks` | Returns a list of all tasks |
 | **Read One** | GET | `/tasks/{id}` | Returns a single task by ID |
 | **Create** | POST | `/tasks` | Creates a new task |
-| **Update** | PUT | `/tasks/{id}` | *Pending Stage 4* |
-| **Delete** | DELETE | `/tasks/{id}` | *Pending Stage 4* |
+| **Update** | PUT | `/tasks/{id}` | Updates the title or completion status |
+| **Delete** | DELETE | `/tasks/{id}` | Deletes a task by ID |
 
 ## Example Request & Response
 
